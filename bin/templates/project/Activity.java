@@ -22,15 +22,16 @@ package __ID__;
 import android.os.Bundle;
 import org.apache.cordova.*;
 
-public class __ACTIVITY__ extends DroidGap
+public class TelerikCallbackActivity extends DroidGap
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
-        //super.loadUrl("file:///android_asset/www/index.html")
+        
+        CordovaActivity ca = (CordovaActivity)this.getActivity();
+		int splashScreenDelayTime = ca.getIntegerProperty("splashScreenDelay", 10000);        
+		super.loadUrl(Config.getStartUrl(), splashScreenDelayTime);  
     }
 }
 
