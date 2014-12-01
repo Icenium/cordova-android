@@ -214,7 +214,7 @@ exports.createProject = function(project_path, package_name, project_name, proje
     var activity_dir    = path.join(project_path, 'src', package_as_path);
     // safe_activity_name is being hardcoded to avoid issues with unicode app name (https://issues.apache.org/jira/browse/CB-6511)
     // TODO: provide option to specify activity name via CLI (proposal: https://issues.apache.org/jira/browse/CB-7231)
-    var safe_activity_name = "CordovaApp";
+    var safe_activity_name = "TelerikCallbackActivity";
     var activity_path   = path.join(activity_dir, safe_activity_name + '.java');
     var target_api      = check_reqs.get_target();
     var manifest_path   = path.join(project_path, 'AndroidManifest.xml');
