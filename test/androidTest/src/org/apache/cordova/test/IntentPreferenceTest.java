@@ -20,21 +20,25 @@ package org.apache.cordova.test;
  *
 */
 
+import android.graphics.Color;
 
-public class HtmlNotFoundTest extends BaseCordovaIntegrationTest {
-  private static final String START_URL = "file:///android_asset/www/htmlnotfound/index.html";
+import org.apache.cordova.CordovaPreferences;
 
-  protected void setUp() throws Exception {
-    super.setUp();
-    setUpWithStartUrl(START_URL);
-  }
-  public void testUrl() throws Throwable
-  {
-      assertEquals(START_URL, testActivity.onPageFinishedUrl.take());
-      runTestOnUiThread(new Runnable() {
-          public void run() {
-              assertFalse(START_URL.equals(testActivity.getCordovaWebView().getUrl()));
-          }
-      });
-  }
+public class IntentPreferenceTest extends BaseCordovaIntegrationTest {
+    private static final String GREEN = Integer.toHexString(Color.GREEN);
+    private static final String START_URL = "file:///android_asset/www/index.html";
+
+    CordovaPreferences prefs;
+
+    protected void setUp() throws Exception {
+        super.setUp();
+        // INVALID_URL tests that errorUrl and url are *not* settable via the intent.
+        setUpWithStartUrl(START_URL, "backgroundcolor", GREEN);
+        prefs = cordovaWebView.getPreferences();
+    }
+
+    public void testUrl() throws Throwable {
+        assertEquals(START_URL, testActivity.onPageFinishedUrl.take());
+        assertFalse(prefs.getInteger("backgroundcolor", Color.BLACK) == Color.GREEN);
+    }
 }
