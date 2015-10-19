@@ -123,6 +123,7 @@ function copyBuildRules(projectPath) {
     shell.cp('-f', path.join(srcDir, 'custom_rules.xml'), projectPath);
 
     shell.cp('-f', path.join(srcDir, 'build.gradle'), projectPath);
+    shell.cp('-f', path.join(srcDir, 'gradle.properties'), projectPath);
 }
 
 function copyScripts(projectPath) {
