@@ -243,6 +243,10 @@ android {
     if (cdvDebugSigningPropertiesFile) {
         addSigningProps(cdvDebugSigningPropertiesFile, signingConfigs.debug)
     }
+
+	dexOptions {
+		preDexLibraries = false
+	}
 }
 
 dependencies {
