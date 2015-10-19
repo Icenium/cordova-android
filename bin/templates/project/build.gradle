@@ -178,6 +178,7 @@ android {
 
     compileSdkVersion cdvCompileSdkVersion
     buildToolsVersion cdvBuildToolsVersion
+    useLibrary 'org.apache.http.legacy'
 
     if (Boolean.valueOf(cdvBuildMultipleApks)) {
         productFlavors {
