@@ -229,8 +229,9 @@ exports.create = function(project_path, config, options, events) {
     var package_name = config.packageName() || 'my.cordova.project';
     var project_name = config.name() ?
         config.name().replace(/[^\w.]/g,'_') : 'CordovaExample';
-
-    var safe_activity_name = config.android_activityName() || options.activityName || 'MainActivity';
+    // safe_activity_name is being hardcoded to avoid issues with unicode app name (https://issues.apache.org/jira/browse/CB-6511)
+    // TODO: provide option to specify activity name via CLI (proposal: https://issues.apache.org/jira/browse/CB-7231)
+    var safe_activity_name = "TelerikCallbackActivity";
     var target_api      = check_reqs.get_target();
 
     //Make the package conform to Java package types
