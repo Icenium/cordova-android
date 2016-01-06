@@ -21,8 +21,7 @@
 
 var Q       = require('q'),
     path    = require('path'),
-    fs      = require('fs'),
-    nopt = require('nopt');
+    fs      = require('fs');
 
 var Adb = require('./Adb');
 
@@ -32,21 +31,6 @@ var spawn = require('cordova-common').superspawn.spawn;
 var CordovaError = require('cordova-common').CordovaError;
 
 function parseOpts(options, resolvedTarget, projectRoot) {
-    options = options || {};
-    options.argv = nopt({
-        gradle: Boolean,
-        ant: Boolean,
-        prepenv: Boolean,
-        versionCode: String,
-        minSdkVersion: String,
-        gradleArg: [String, Array],
-        keystore: path,
-        alias: String,
-        storePassword: String,
-        password: String,
-        keystoreType: String
-    }, {}, options.argv, 0);
-
     var ret = {
         buildType: options.release ? 'release' : 'debug',
         buildMethod: process.env.ANDROID_BUILD || 'gradle',
@@ -55,29 +39,27 @@ function parseOpts(options, resolvedTarget, projectRoot) {
         extraArgs: []
     };
 
-    if (options.argv.ant || options.argv.gradle)
-        ret.buildMethod = options.argv.ant ? 'ant' : 'gradle';
+    if (options.ant || options.gradle)
+        ret.buildMethod = options.ant ? 'ant' : 'gradle';
 
     if (options.nobuild) ret.buildMethod = 'none';
 
-    if (options.argv.versionCode)
+    if (options.versionCode)
         ret.extraArgs.push('-PcdvVersionCode=' + options.argv.versionCode);
 
-    if (options.argv.minSdkVersion)
+    if (options.minSdkVersion)
         ret.extraArgs.push('-PcdvMinSdkVersion=' + options.argv.minSdkVersion);
 
-    if (options.argv.gradleArg) {
-        ret.extraArgs = ret.extraArgs.concat(options.argv.gradleArg);
-    }
+    if (options.gradleArg)
+        ret.extraArgs = ret.extraArgs.concat(options.gradleArg);
 
     var packageArgs = {};
-
-    if (options.argv.keystore)
-        packageArgs.keystore = path.relative(projectRoot, path.resolve(options.argv.keystore));
+    if (options.keystore)
+        packageArgs.keystore = path.relative(projectRoot, path.resolve(options.keystore));
 
     ['alias','storePassword','password','keystoreType'].forEach(function (flagName) {
-        if (options.argv[flagName])
-            packageArgs[flagName] = options.argv[flagName];
+        if (options[flagName])
+            packageArgs[flagName] = options[flagName];
     });
 
     var buildConfig = options.buildConfig;
