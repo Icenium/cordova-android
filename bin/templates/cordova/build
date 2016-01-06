@@ -35,7 +35,18 @@ var buildOpts = nopt({
     'debug' : Boolean,
     'release' : Boolean,
     'nobuild': Boolean,
-    'buildConfig' : path
+    'buildConfig' : path,
+    'gradle': Boolean,
+    'ant': Boolean,
+    'prepenv': Boolean,
+    'versionCode': String,
+    'minSdkVersion': String,
+    'gradleArg': Array,
+    'keystore': path,
+    'alias': String,
+    'storePassword': String,
+    'password': String,
+    'keystoreType': String
 }, { 'd' : '--verbose' });
 
 // Make buildOptions compatible with PlatformApi build method spec
