@@ -161,7 +161,7 @@ GradleBuilder.prototype.prepEnv = function(opts) {
         // For some reason, using ^ and $ don't work.  This does the job, though.
         var distributionUrlRegex = /distributionUrl.*zip/;
         /*jshint -W069 */
-        var distributionUrl = process.env['CORDOVA_ANDROID_GRADLE_DISTRIBUTION_URL'] || 'http\\://services.gradle.org/distributions/gradle-2.13-all.zip';
+        var distributionUrl = process.env['CORDOVA_ANDROID_GRADLE_DISTRIBUTION_URL'] || 'http\\://services.gradle.org/distributions/gradle-2.13-bin.zip';
         /*jshint +W069 */
         var gradleWrapperPropertiesPath = path.join(self.root, 'gradle', 'wrapper', 'gradle-wrapper.properties');
         shell.chmod('u+w', gradleWrapperPropertiesPath);
@@ -189,7 +189,7 @@ GradleBuilder.prototype.build = function(opts) {
     .progress(function (stdio){
         if (stdio.stderr) {
             /*
-             * Workaround for the issue with Java printing some unwanted information to 
+             * Workaround for the issue with Java printing some unwanted information to
              * stderr instead of stdout.
              * This function suppresses 'Picked up _JAVA_OPTIONS' message from being
              * printed to stderr. See https://issues.apache.org/jira/browse/CB-9971 for
