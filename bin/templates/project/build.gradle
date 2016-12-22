@@ -189,13 +189,13 @@ android {
             armv7 {
                 versionCode cdvVersionCode ?: defaultConfig.versionCode + 2
                 ndk {
-                    abiFilters "armeabi-v7a", "armeabi"
+                    abiFilters "armeabi-v7a", "armeabi", "arm64-v8a"
                 }
             }
             x86 {
                 versionCode cdvVersionCode ?: defaultConfig.versionCode + 4
                 ndk {
-                    abiFilters "x86", ""
+                    abiFilters "x86", "x86_64"
                 }
             }
             all {
