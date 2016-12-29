@@ -180,21 +180,34 @@ android {
 
     if (Boolean.valueOf(cdvBuildMultipleApks)) {
         productFlavors {
+            armeabi {
+                versionCode defaultConfig.versionCode*10 + 1
+                ndk {
+                    abiFilters = ["armeabi"]
+                }
+            }
             armv7 {
                 versionCode defaultConfig.versionCode + 2
                 ndk {
-                    abiFilters "armeabi-v7a", "armeabi", "arm64-v8a"
+                    abiFilters = ["armeabi-v7a"]
+                }
+            }
+            arm64 {
+                versionCode defaultConfig.versionCode*10 + 3
+                ndk {
+                    abiFilters = ["arm64-v8a"]
                 }
             }
             x86 {
                 versionCode defaultConfig.versionCode + 4
                 ndk {
-                    abiFilters "x86", "x86_64"
+                    abiFilters = ["x86"]
                 }
             }
-            all {
+            x86_64 {
+                versionCode defaultConfig.versionCode*10 + 5
                 ndk {
-                    abiFilters "all", ""
+                    abiFilters = ["x86_64"]
                 }
             }
         }
